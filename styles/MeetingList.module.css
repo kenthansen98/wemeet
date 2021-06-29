@@ -1,0 +1,21 @@
+.container {
+    align-self: center;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.meetingItem {
+    border-radius: 3px;
+    background-color: #e8e8e8;
+    box-shadow: 0 2px 3px gray;
+    margin: 0 1.5rem;
+}
+
+.title {
+    color: #4d4d4d;
+}
+
+.link {
+    align-self: center;
+}
