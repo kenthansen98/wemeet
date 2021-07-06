@@ -8,12 +8,17 @@ export const typeDefs = gql`
         username: String
         password: String
         meetings: [Meeting]
+        dateRanges: [DateRange]
     }
 
     type DateRange {
+        id: ID!
         start: Date!
         end: Date!
-        userId: ID!
+        user: User!
+        userId: Int
+        meeting: Meeting!
+        meetingId: Int
     }
 
     type Meeting {
@@ -21,6 +26,7 @@ export const typeDefs = gql`
         name: String
         description: String
         dateRanges: [DateRange]
+        participants: [User]
     }
 
     type Query {
@@ -28,5 +34,14 @@ export const typeDefs = gql`
         getMeeting(id: ID!): Meeting
         getUsers: [User]
         getUser(id: ID!): User
+    }
+
+    input MeetingCreateInput {
+        name: String
+        description: String
+    }
+
+    type Mutation {
+        createMeeting(data: MeetingCreateInput!): Meeting
     }
 `;

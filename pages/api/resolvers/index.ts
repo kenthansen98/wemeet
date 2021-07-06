@@ -1,6 +1,12 @@
 import { GraphQLScalarType, Kind } from "graphql";
+import prisma from "../../../lib/prisma";
 
-export const dateScalar = new GraphQLScalarType({
+type MeetingCreateInput = {
+    name?: string;
+    description?: string;
+};
+
+const dateScalar = new GraphQLScalarType({
     name: "Date",
     description: "Date custom scalar type",
     serialize(value: Date) {
@@ -18,18 +24,69 @@ export const dateScalar = new GraphQLScalarType({
 });
 
 export const resolvers = {
+    Date: dateScalar,
     Query: {
-        getMeetings: () => {
-            
+        getMeetings: async () => {
+            return await prisma.meeting.findMany();
         },
-        getMeeting: (id: string) => {
-
+        getMeeting: async (parent: any, args: { id: number }) => {
+            return await prisma.meeting.findUnique({
+                where: { id: args.id }
+            });
         },
-        getUsers: () => {
-
+        getUsers: async () => {
+            return await prisma.user.findMany();
         },
-        getUser: (id: string) => {
-
+        getUser: async (parent: any, args: { id: number }) => {
+            return await prisma.user.findUnique({
+                where: { id: args.id }
+            });
         }
-    }
+    },
+    Mutation: {
+        createMeeting: (parent: any, args: { data: MeetingCreateInput }) => {
+            return prisma.meeting.create({
+                data: {
+                    name: args.data.name,
+                    description: args.data.description
+                }
+            });
+        }
+    },
+    Meeting: {
+        dateRanges: (parent: any, args: any) => {
+            return prisma.meeting.findUnique({
+                where: { id: parent?.id }
+            }).dateRanges();
+        },
+        participants: (parent: any, args: any) => {
+            return prisma.meeting.findUnique({
+                where: { id: parent?.id }
+            }).participants();
+        }
+    },
+    User: {
+        meetings: (parent: any, args: any) => {
+            return prisma.user.findUnique({
+                where: { id: parent?.id }
+            }).meetings();
+        },
+        dateRanges: (parent: any, args: any) => {
+            return prisma.user.findUnique({
+                where: { id: parent?.id }
+            }).dateRanges();
+        }
+    },
+    DateRange: {
+        meeting: (parent: any, args: any) => {
+            return prisma.dateRange.findUnique({
+                where: { id: parent?.id }
+            }).meeting();
+        },
+        user: (parent: any, args: any) => {
+            return prisma.dateRange.findUnique({
+                where: { id: parent?.id }
+            }).user();
+        }
+    } 
 }
