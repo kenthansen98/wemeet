@@ -25,10 +25,8 @@
 }
 
 .input {
-    /* height: 1.75rem; */
     border-radius: 5px;
     padding: 0.5rem;
-    /* border: 1px solid black; */
     margin-top: 0.5rem;
     margin-bottom: 1rem;
     margin-left: 3px;
@@ -39,5 +37,22 @@
 }
 
 .input:focus {
+    border: 2px solid #ccc;
+}
+
+.textarea {
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-left: 3px;
+    height: 5em;
+    max-width: calc(100% - 5px);
+    font-size: 16px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.textarea:focus {
     border: 2px solid #ccc;
 }

@@ -1,6 +1,7 @@
-import Header from "./Header"
+import Header from "./Header";
 import styles from "../styles/Layout.module.css";
 import Image from "next/image";
+import ClientOnly from "./ClientOnly";
 
 const Layout = ({ children }: any) => {
     return (
@@ -15,9 +16,9 @@ const Layout = ({ children }: any) => {
                 />
             </div>
             <Header />
-            {children}
+            <ClientOnly className={styles.clientOnly}>{children}</ClientOnly>
         </div>
-    )
+    );
 };
 
 export default Layout;

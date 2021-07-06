@@ -4,7 +4,7 @@ export const typeDefs = gql`
     scalar Date
 
     type User {
-        id: ID!
+        id: Int!
         username: String
         password: String
         meetings: [Meeting]
@@ -12,7 +12,7 @@ export const typeDefs = gql`
     }
 
     type DateRange {
-        id: ID!
+        id: Int!
         start: Date!
         end: Date!
         user: User!
@@ -22,7 +22,7 @@ export const typeDefs = gql`
     }
 
     type Meeting {
-        id: ID!
+        id: Int!
         name: String
         description: String
         dateRanges: [DateRange]
@@ -31,9 +31,9 @@ export const typeDefs = gql`
 
     type Query {
         getMeetings: [Meeting]
-        getMeeting(id: ID!): Meeting
+        getMeeting(id: Int!): Meeting
         getUsers: [User]
-        getUser(id: ID!): User
+        getUser(id: Int!): User
     }
 
     input MeetingCreateInput {

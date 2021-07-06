@@ -11,10 +11,15 @@
     margin: 0.5rem 1.5rem;
 }
 
+.meetingItem:hover {
+    background-color: #dbdbdb;
+}
+
 .title {
     color: #4d4d4d;
 }
 
 .link {
     align-self: center;
+    margin-bottom: 2rem;
 }
